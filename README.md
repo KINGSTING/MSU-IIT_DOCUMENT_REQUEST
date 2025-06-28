@@ -57,6 +57,7 @@ This project is for academic or internal use within MSU-IIT.
 Make sure .env and google_client.json are in .gitignore.
 
 🙌 Acknowledgments
+
 This project is maintained by Christian Dave Janiola, Zach Maregmen, Kyla Reambonanza, and Jemar John Lumingkit.
 Special thanks to the Ricardo C. Enguito, MPA the Registrar of MSU-IIT and Malikey M. Maulana, MSCS as course adviser for their guidance.
 
