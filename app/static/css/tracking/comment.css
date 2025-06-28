@@ -1,0 +1,121 @@
+/* Info Sections */
+.section_header {
+    height: 34px;
+    font-size: 14px;
+    padding-left: 10px;
+    padding-top: 10px;
+    margin: auto;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #D2D5DC;
+}
+
+/* Add comment form */
+.form_container {
+    width: 95%;
+    margin: auto;
+    margin-top: 20px;
+    text-align: right;
+}
+
+.form_container textarea {
+    width: 100%;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    padding: 5px;
+    outline: none;
+    border: 1px solid #A6A5A5;
+}
+
+.form_container button {
+    font-size: 12px;
+    color: white;
+    height: 29px;
+    padding: 5px 9px;
+    outline: none;
+    border: 1px solid #A6A5A5;
+    background-color: var(--processing);
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.form_container button:hover {
+    filter: brightness(0.8);
+}
+
+/* Comments */
+.comment_container {
+    height: 455px;
+    margin: auto;
+    overflow-y: auto;
+}
+
+.comment_item {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 11px;
+    border: 1px solid #DDDBD5;
+    margin: 0 8px;
+    margin-bottom: 8px;
+    padding: 8px;
+}
+
+.comment_item:last-child {
+    margin-bottom: none;
+}
+
+/* Comment content */
+.comment_header {
+    font-size: 10px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+/* Dynamic Backgrounds */
+.user {
+    color: #444444;
+}
+
+.admin {
+    color: #9D4542;
+}
+
+/* Empty Comments */
+.empty_status {
+    text-align: center;
+    font-size: 14px;
+}
+
+/* Error message */
+.error_message {
+    float: left;
+    margin: auto;
+    color: red;
+    font-size: 12px;
+    text-align: center;
+}
+
+.error_message.hidden {
+    display: none;
+}
+
+
+/* Button Styles */
+.action_button.clarify {
+    background-color: var(--clarifying);
+}
+
+.action_button.clarifying {
+    background-color: var(--processing);
+}
+
+.action_button.pending {
+    background-color: var(--processing);
+}
+
+.action_button.processing {
+    background-color: var(--ready);
+}
+
+.action_button.ready {
+    background-color: var(--completed);
+}

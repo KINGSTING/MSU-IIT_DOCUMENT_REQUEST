@@ -1,0 +1,33 @@
+{% extends "master.html" %} 
+
+{% block title %}Liabilities Detected{% endblock %}
+
+{% block content %}
+
+<!-- Go Back Button -->
+<div class="button-container">
+    <button class="back-button" type="button" onclick="window.history.back()">
+        <i class="fa-solid fa-caret-left"></i>
+        <span class="buttonText">Go Back</span>
+    </button>
+</div>
+
+<section class="box">
+    <!-- Validation Title/Header here -->
+    <div class="fw-bolder">
+        <header>LIABILITIES DETECTED</header>
+    </div>
+
+    <!-- Validation Body Message here -->
+    <div class="text-light"> 
+        <p>It seems you still have liabilities. Please settle your liabilities first before making a request.</p>
+    </div>
+    
+    <!-- Redirection Button here -->
+    <div class="no-border-button">
+        <button type="button" onclick="window.location.href = '/auth/login'">Submit Another Request
+        </button>
+    </div> 
+</section>
+
+{% endblock %}

@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@100;300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <link href="{{ url_for('static', filename='css/request_summary.css') }}" rel="stylesheet">
+    <script src="{{ url_for('static', filename='js/master.js') }}" defer></script>
+
+    <!-- Font Awesome CDN link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+      
+    <title>Request Summary</title>
+
+</head>   
+<body>
+
+    <!-- Header Navigation Bar -->
+    <header class="site-header">
+        <nav class="navbar">
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main role="main" class="container">
+      <img class="image-center" width="350" height="53" src="{{ url_for('static', filename='images/msuiit_registrar_logo.png') }}" alt="MSU-IIT Registrar Logo"> 
+      <hr class="margin-line" width="95%" size="1" style="margin: auto;" color="#A6A5A5"> 
+    </main>
+
+     <!-- Display Flash Messages -->
+     {% with messages = get_flashed_messages(with_categories=true) %}
+     {% if messages %}
+         <div class="flash-messages">
+             {% for category, message in messages %}
+                 <div class="flash-message {{ category }}">
+                     {{ message }}
+                 </div>
+             {% endfor %}
+         </div>
+        {% endif %}
+    {% endwith %}
+
+</body>
+<section class="form-container">
+    <!-- Progress Bar -->
+    <div class="main">
+        <ul>
+            <li>
+                <i class="none"></i>
+                <div class="progress one">
+                    <p>1</p>
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <p class="progress-label"><i>Document Request</i></p>
+            </li>
+
+            <li>
+                <i class="none"></i>
+                <div class="progress two">
+                    <p>2</p>
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <p class="progress-label"><i>Shipping Details</i></p>
+            </li>   
+
+            <li>
+                <i class="none"></i>
+                <div class="progress three" style="height: 51px; width: 51px; background-color: #9D4542;">
+                    <p>3</p>
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <p class="progress-label-summary"><i>Summary</i></p>
+            </li>
+        </ul>
+    </div>
+
+
+        <div class="yellow-header-box-1">
+            <h3>Summary</h3>
+        </div>
+
+        <!-- Main Summary Box -->
+        <div class="main-detail-box-1">   
+            <!-- Client Details Summary -->
+            <button class="accordion">Client Details</button>
+            <div class="panel">
+                <div class="client-row">
+                    <span class="label">Student ID:</span>
+                    <span class="value">{{ client_info.student_id }}</span>
+                </div>
+
+                <div class="client-row">
+                    <span class="label">Full Name:</span>
+                    <span class="value">{{ client_info.first_name }} {{ client_info.last_name }}</span>
+                </div>
+                <div class="client-row">
+                    <span class="label">Email:</span>
+                    <span class="value">{{ client_info.email }} </span>
+                </div>
+                <div class="client-row">
+                    <span class="label">Birth Date:</span>
+                    <span class="value">{{ client_info.birth_date.strftime('%B %d, %Y') }}</span>
+                </div>
+            </div>
+
+            <!-- Document Details Summary -->
+            <button class="accordion">Document Request Details</button>
+            <div class="panel">
+                {% for row in document_result %}
+                    <div class="document-row">
+                        <span class="label">Type:</span>
+                        <span class="value">{{ row.documentCategory }}</span>
+                    </div>
+                    <div class="document-row">
+                        <span class="label">Category:</span>
+                        <span class="value">{{ row.documentType }}</span>
+                    </div>
+                    <div class="document-row">
+                        <span class="label">Price:</span>
+                        <span class="value">{{ row.price }}</span>
+                    </div>
+                    <div class="document-row">
+                        <span class="label">Copies Requested:</span>
+                        <span class="value">{{ row.pages }}</span>
+                    </div>
+                    
+                    <!-- Displays uploaded file under Authentication documents -->
+                    {% if row.documentType == 'Authentication' %}
+                        <div class="document-row">
+                            <span class="label">File Uploaded:</span>
+                            <span class="value-file"><a href="{{ row.file_upload }}" target="_blank">Uploaded File</a></span>  
+                        </div>
+                    {% endif %}
+
+                    <!-- Displays semester and year for Report of Grades -->
+                    {% if row.documentCategory == 'Report of Grades' %}
+                        <div class="document-row">
+                            <span class="label">Semester & Year:</span>
+                            <span class="value">{{ row.sem_year }}</span>  
+                        </div>
+                    {% endif %}
+
+                    <!-- Displays semester and year for COR Reprinting -->
+                    {% if row.documentCategory == 'COR Reprinting' %}
+                        <div class="document-row">
+                            <span class="label">Semester & Year:</span>
+                            <span class="value">{{ row.sem_year }}</span>  
+                        </div>
+                    {% endif %}
+    
+                        {% if not loop.last%}
+                            <hr class="separate-multiple-documents" width="100%" style="margin: 10px auto; border-top: 0.5px solid #D9D9D9;"> 
+                        {% endif %}
+                {% endfor %}
+            </div>
+
+            <!-- Shipping Summary Details -->
+            <button class="accordion">Shipping Details</button>
+            <div class="panel">
+                {% if shipping_result %}
+                    {% if shipping_result.category == 'pickup' %}
+                        <div class="shipping-row">
+                            <span class="label">Category:</span>
+                            <span class="value">For Pick-up</span>
+                        </div>
+                        <div class="shipping-row">
+                            <span class="label">Contact:</span>
+                            <span class="value">{{ shipping_result.contact_number }}</span>
+                        </div>
+                    {% else %}
+                        <div class="shipping-row">
+                            <span class="label">Category:</span>
+                            <span class="value">For Shipping</span>
+                        </div>
+                        <div class="shipping-row">
+                            <span class="label">Address:</span>
+                            <span class="value">{{ shipping_result.address }}</span>
+                        </div>
+                        <div class="shipping-row">
+                            <span class="label">Contact:</span>
+                            <span class="value">{{ shipping_result.contact_number }}</span>
+                        </div>
+                    {% endif %}
+                </div>
+                {% else %}
+                    <p>No shipping details available.</p>
+                {% endif %}
+
+            <!-- Additional Details Summary -->
+                <button class="accordion">Additional Details</button>
+                    <div class="panel">
+                        <div class="shipping-row">
+                            <span class="label">Purpose of Request:</span>
+                            <span class="value">{{ request.purpose }}</span>
+                        </div>
+                        <div class="client-row">
+                            <span class="label">Category:</span>
+                            <span class="value">{{ request.student_type }} Student</span>
+                        </div>
+                    </div>
+            </div>
+
+
+        <!-- Payment Details Summary -->
+        <div class="upload-box">
+
+            <div class="upd-container">
+                <p class="price-breakdown">Price Breakdown</p>
+            </div>
+            <hr class="margin-line-3"> 
+            
+              <!-- Table -->
+                <table class="table-2" id="price-breakdown-table">
+                    <thead>
+                        <tr> 
+                            <th>Document</th>
+                            <th>Copies</th>
+                            <th class="req-header">Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>    
+                        {% for row in document_result %}                   
+                        <tr>
+                            <td>{{ row.documentCategory }}</td>
+                            <td>{{ row.pages }}</td>
+                            <td>
+                                {{ row.price }} {% if row.documentCategory == 'Transcripts of Records' or row.documentType == 'Authentication' %}/page{% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            <div class="shipping-price-cont">
+                <div class="shipping-info-cont">
+                    {% if shipping_result.category != 'pickup' %}
+                    <div class="shipping-info-items">
+                        <span class="asterisk">*</span>
+                        <span class="shipping-fee-label">Note:</span>
+                        <span class="shipping-fee-value">Shipping to {{ shipping_result.region if shipping_result.region else "No region available" }}</span>
+                        {% if shipping_price > 0 %}
+                        <span class="shipping-fee-amount">Payment for Shipping: Php <strong>{{ shipping_price}}.00</strong></span>
+                        {% else %}
+                        <span class="shipping-fee-amount">No price available</span>
+                        {% endif %}
+                        <!-- <span class="shipping-fee-amount">
+                            {{ shipping_result.price if shipping_result.price else "No price available" }}
+                        </span> -->
+                    </div>
+                    {% endif %}
+
+                    {% for row in document_result %}
+                        {% if row.documentCategory == "Transcripts of Records" %} 
+                        <div class="shipping-info-items">
+                            <span class="asterisk">*</span>
+                            <span class="tor-estimation-label">Note:</span>
+                            <span class="tor-estimation-value">Your TOR has <strong>{{tor_pages}}</strong> pages</span>
+                            <span class="tor-estimation-amount">Payment for TOR: Php <strong>{{tor_pages*50}}</strong></span>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+
+            <hr class="margin-line-2"> 
+            <div class="payment-details">
+                {% if payment_result %}
+                    <div class="payment-items">
+                        <div class="payment-row">
+                            <span class="payment-label">Total Amount:</span>
+                            <span class="payment-value">Php {{ payment_result.amount }}</span>
+                        </div>
+                        <!-- <div class="payment-row">
+                            <span class="label">Proof of payment:</span>
+                            <span class="value">
+                                <a id="proofLink" href="{{ payment_result.proof_of_payment or '#' }}" target="_blank" onclick="handleProofLinkClick(event)">
+                                    {% if payment_result.proof_of_payment %}
+                                        View Proof of Payment
+                                    {% else %}
+                                        No Proof of Payment selected
+                                    {% endif %}
+                                </a>
+                            </span>
+                        </div> -->
+                {% else %}
+                    <p>No payment details available.</p>
+                {% endif %}
+                    </div>     
+            </div>
+       
+            <!-- Upload Proof of Payment -->
+            <div class="upd-container">
+                <p class="upload-proof-now">Upload Proof of Payment</p>   
+            </div>  
+            <hr class="margin-line-1">
+
+            <div class="section-container">
+                <div class="upload-section">
+                    <div class="up-row">
+                        <div class="up-items">
+                            <span class="up-label">Proof of payment:</span>
+                            <span class="up-value" id="proofStatus">
+                                {% if payment_result.proof_of_payment %}
+                                    View Proof of Payment
+                                {% else %}
+                                    No Proof of Payment selected
+                                {% endif %}
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Add Upload Button -->
+                    <form id="uploadForm" action="{{ url_for('summary.finish_request', id=request.request_id) }}" method="post" enctype="multipart/form-data">
+                        <input type="file" id="fileInput" name="proof_payment_img" accept="image/*" style="display: none; " onchange="updateProofStatus()">
+                        <input type="hidden" id="amount" name="amount" value="{{ payment_result.amount }}">
+                        <button type="button" class="upload-btn" onclick="document.getElementById('fileInput').click();">Upload Image
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </form>
+                </div> 
+            
+                <div class="separator"></div>
+
+                <!-- Image Preview -->
+                <div class="view-proof-section">
+                    <img id="uploadedImage" src="" alt="Uploaded Proof of Payment" style="display: none;">
+                    <span class="view-proof-label">Image will appear here</span>
+                    <!-- <p class="preview-text">Image will appear here.</p> -->
+                </div>
+
+                <div class="fullscreen-modal" id="fullscreenModal">
+                    <img id="modalImage" src="" alt="Full-Screen View">
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- Javascript functions -->
+        <script>
+            function updateProofStatus() {
+                var fileInput = document.getElementById('fileInput');
+                var proofStatus = document.getElementById('proofStatus');
+                // var proofLink = document.getElementById('proofLink');
+                var uploadedImage = document.getElementById('uploadedImage');
+                var viewProofSection = document.querySelector('.view-proof-section');
+                
+        
+                if (fileInput.files.length > 0){
+                    var file = fileInput.files[0];
+                    var reader = new FileReader();
+        
+                    reader.onload = function(e) {
+                        // Upload the status text
+                        proofStatus.textContent = "Proof of Payment Uploaded";
+                        // proofLink.href = e.target.result;
+                        // proofLink.textContent = "View Selected Proof of Payment";
+                        // proofLink.style.pointerEvents = "auto"; 
+                        // proofLink.style.color = ""; 
+
+                        // Update the view-proof-section with the image
+                        uploadedImage.src = e.target.result;
+                        uploadedImage.style.display = "block";
+                    };
+        
+                    reader.readAsDataURL(file); 
+                } else {
+                    // Reset the status text
+                    proofStatus.textContent = "No Proof of Payment Uploaded";
+
+                    // Reset the view-proof-section
+                    uploadedImage.src = "";
+                    uploadedImage.style.display = "none";
+
+
+                    // Reset the proof link
+                    // proofLink.href = "#";
+                    // proofLink.textContent = "No proof of payment selected";
+                    // proofLink.style.pointerEvents = "none"; 
+                    // proofLink.style.color = "gray"; 
+                }
+            }
+        
+            // Open image in full-screen modal
+            document.getElementById('uploadedImage').addEventListener('click', function () {
+                var modal = document.getElementById('fullscreenModal');
+                var modalImage = document.getElementById('modalImage');
+                modalImage.src = this.src;
+                modal.style.display = "flex";
+            });
+
+            document.getElementById('fullscreenModal').addEventListener('click', function () {
+                this.style.display = "none";
+            });
+
+
+            function submitRequest(isGoogle) {
+                var proofStatus = document.getElementById('proofStatus');
+                var fileInput = document.getElementById('fileInput');
+        
+                // Check if proof of payment link already exists
+                if (fileInput.files.length === 0) {
+                    // If proof of payment exists in database, can submit the form
+                    // console.log(document.getElementById('amount').value)
+                    alert("Please upload an image for proof of payment before submitting.");
+                    return false; 
+                }
+                    if (isGoogle) {
+                        fetch('/request/submit', {  // Adjust the URL to match your file upload endpoint
+                            method: 'POST',
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            
+                            if (data.msg) {
+                                window.parent.location.reload();
+                            } else {
+                                console.error("Failed to upload file. Please try again.");
+                            }
+                        })
+                        .catch(error => {
+                            console.error("Error uploading file:", error);
+                            window.parent.location.reload();
+                        });
+                    }
+                    else {
+                        document.getElementById('uploadForm').submit(   );  // Submit the form to redirect
+                        return
+                    }
+                }
+                
+                // If no proof exists, check if a file is selected
+                // if (fileInput.files.length == 0) {
+                //     alert("Please upload an image for proof of payment before submitting.");
+                //     return false; // Prevent form submission
+                // }
+
+                // If a new file is selected, proceed with submission
+             
+            document.getElementById('uploadedImage').addEventListener('click', function () {
+                var modal = document.getElementById('fullscreenModal');
+                var modalImage= document.getElementById('modalImage');
+                modalImage.src = this.src;
+                modal.style.display = "flex";
+            }); 
+
+            document.getElementById('fullscreenModal').addEventListener('click', function () {
+                this.style.display = "none";
+            });
+
+            // function handleProofLinkClick(event) {
+            //     var proofLink = document.getElementById('proofLink');
+                
+            //     // Prevent redirection if href is "#"
+            //     if (proofLink.href.endsWith('#')) {
+            //         event.preventDefault();
+            //     }
+            // }
+
+            // For flash messages transition
+            window.addEventListener('DOMContentLoaded', function() {
+            const flashMessages = document.querySelectorAll('.flash-message');
+            flashMessages.forEach(function(message) {
+                setTimeout(function() {
+                    message.classList.add('fade-out');  
+                }, 5000);  // Wait 3 seconds before fading out
+            });
+        });
+
+        </script>
+
+
+        <!-- JS for accordion transition and animation -->
+        <script>
+            var acc  = document.getElementsByClassName("accordion");
+            var i;
+
+            // Loops through all accordion buttons
+            for (i = 0; i < acc.length; i++) {
+                acc[i].addEventListener("click", function() {
+                    this.classList.toggle("active");
+
+                    // Toggle between hiding and showing the active panel
+                    var panel = this.nextElementSibling;
+
+                    if (panel.style.maxHeight) {
+                        panel.style.maxHeight = null;
+
+                    } else {
+                        panel.style.maxHeight = panel.scrollHeight + "px";
+                    }
+                }); 
+
+                // If accordion has the "active" state by default, expand panel
+                acc[i].classList.contains("active") 
+                var panel = acc[i].nextElementSibling;
+                panel.style.maxHeight = panel.scrollHeight + "px";
+            }
+        </script>
+
+
+    <!-- Button Container -->
+    <div class="btns-container">
+        <!-- Go Back Button -->
+        <button class="back-button" type="button" onclick="window.history.back()">
+            <i class="fa-solid fa-caret-left"></i>
+            <span class="buttonText">Go Back</span>
+        </button>
+        <!-- Cancel Button -->
+        <button class="cancel-button" type="button" style="left:25px;" onclick="cancel_session()">
+            <span class="buttonText">Cancel</span>
+        </button>
+        <!-- Submit Button --> 
+            <div class="submit-button-container">
+                {% if with_google %}
+                <button class="submit-button" type="submit" onclick="submitRequest(true)" title="Submit Request">Submit Request Now
+                    <i class="fa-solid fa-caret-right"></i>
+                </button>
+                {% else %}
+                <button class="submit-button" type="submit" onclick="submitRequest(false)" title="Submit Request">Submit Request
+                    <i class="fa-solid fa-caret-right"></i>
+                </button>
+                {% endif %}
+            </div>
+        </div>
+
+    <script src="{{ url_for('static', filename='js/document.js') }}"></script>
+</section>
+
+    <!-- Footer Navigation Bar -->
+    <nav class= "footer-bar">
+        <div class="container-fluid">
+            <span class="navbar-text mx-auto">@ 2024 MSU-IIT Registrar</span>
+        </div>
+    </nav>  
+</html>
+
+

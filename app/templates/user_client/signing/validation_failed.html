@@ -1,0 +1,48 @@
+{% extends "master.html" %} 
+
+{% block title %}Validation Failed{% endblock %}
+
+{% block content %}
+
+
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
+<!-- Go Back Button -->
+<div class="button-container">
+    <button class="back-button" type="button" onclick="goBack()">
+        <i class="fa-solid fa-caret-left"></i>
+        <span class="buttonText">Go Back</span>
+    </button>
+</div>
+
+<section class="box">
+    <!-- Validation Title/Header here -->
+    <div class="fw-bolder">
+        <header>VALIDATION FAILED</header>
+    </div>
+
+    <!-- Validation Body Message here -->
+    <div class="text-light"> 
+        {% if message %}
+            <p>{{message}}</p>
+        {% else %}
+            <p>
+                The information you provided does not match with any record in the database. 
+            </p>
+        {% endif %}
+
+        
+        
+    </div>
+    
+    <!-- Redirection Button here -->
+    <div class="no-border-button">
+        <button type="button" onclick="window.location.href = 'login'">Submit Another Request
+        </button>
+    </div> 
+</section>
+
+{% endblock %}

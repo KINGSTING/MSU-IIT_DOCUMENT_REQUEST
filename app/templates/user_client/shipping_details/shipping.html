@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@100;300;400;600;700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+    <link href="{{ url_for('static', filename='css/document.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/shipping.css') }}" rel="stylesheet">
+
+
+    <script src="{{ url_for('static', filename='js/shipping.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/master.js') }}" defer></script>
+
+
+    <!-- Font Awesome CDN link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <title>Shipping Details</title>
+
+    <style>
+        div.progress.one::after {
+            background-color: var(--completed);
+        }
+
+        div.progress.two::after {
+            background-color: grey;
+        }
+
+        tr {
+            color: red;
+        }
+
+        .submit-button {
+            margin: auto;
+        }
+
+        .cancel-button {
+            margin-right: 70px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Header Navigation Bar -->
+    <header class="site-header">
+        <nav class="navbar">
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main role="main" class="container">
+        <img class="image-center" width="350" height="53"
+            src="{{ url_for('static', filename='images/msuiit_registrar_logo.png') }}" alt="MSU-IIT Registrar Logo">
+        <hr class="margin-line" width="95%" size="1" style="margin: auto;" color="#A6A5A5">
+    </main>
+</body>
+<!-- Form Section -->
+<section class="form-container">
+    <!-- Progress Bar -->
+    <div class="main">
+        <ul>
+            <li>
+                <i class="none"></i>
+                <div class="progress one" style="background-color:#699361;">
+                    <p>1</p>
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <p class="progress-label"><i>Document Request</i></p>
+            </li>
+
+            <li>
+                <i class="none"></i>
+                <div class="progress three" style="height: 51px; width: 51px; background-color: #9D4542; right:5px;">
+                    <p>2</p>
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <p class="progress-label-summary"><i>Shipping Details</i></p>
+            </li>
+
+            <li>
+                <i class="none"></i>
+                <div class="progress two" style="background-color: grey;">
+                    <p>3</p>
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <p class="progress-label-summary"><i>Summary</i></p>
+            </li>
+
+        </ul>
+    </div>
+
+    <!-- Yellow Box/Main Header -->
+    <div class="box">
+        <p>SHIPPING DETAILS</p>
+    </div>
+
+    <!-- Main Content -->
+    <div class="shipping-form-container">
+        <form id="shipping-form" action="/submit-shipping" method="POST" onsubmit="submitForm(event)">
+
+            <!-- Category -->
+            <div class="shipping-category">
+                <span>Mail Requested Documents:</span>
+                <label><input type="radio" name="mail" value="philippines" checked>Within Philippines</label>
+                <label><input type="radio" name="mail" value="pickup"> For Pickup</label>
+            </div>
+
+            <!-- Within Philippines -->
+            <div class="within-Philippines" style="display: none;">
+                <h4>Local Shipping Details</h4>
+                <!-- Courier Input -->
+                <div class="form-group">
+                    <select id="courier" name="courier" value="" hidden>
+                        <option value="" disabled selected>Select Courier</option>
+                        <option value="LBC" selected>LBC</option>
+                        <option value="FedEx">FedEx</option>
+                        <option value="Lalamove">Lalamove</option>
+                    </select>
+                </div>
+                <!-- Major Islands Input -->
+                <div class="form-group">
+                    <label for="area">Area <span>*</span></label>
+                    <select id="area" name="courier">
+                        <option value="" disabled selected hidden>Select Area</option>
+                        <option value="Luzon">Luzon</option>
+                        <option value="Visayas">Visayas</option>
+                        <option value="Mindanao">Mindanao</option>
+                    </select>
+                </div>
+                <!-- Region Input -->
+                <!-- <div class="form-group">
+                    <label for="region">Region <span>*</span></label>
+                    <select id="region" name="region" required onchange="updateProvinces()">
+                        <option value="" disabled selected>Select Region</option>
+                        <option value="NCR">NCR (National Capital Region)</option>
+                        <option value="CAR">CAR (Cordillera Administrative Region)</option>
+                        <option value="Region1">Region I (Ilocos Region)</option>
+                        <option value="Region2">Region II (Cagayan Valley)</option>
+                        <option value="Region6">Region VI (Western Visayas)</option>
+                        <option value="Region7">Region VII (Central Visayas)</option>
+                        <option value="Region10">Region X (Northern Mindanao)</option>
+                        <option value="Region11">Region XI (Davao Region)</option>
+                    </select>
+                </div> -->
+                <!-- Province Input -->
+                <!-- <div class="form-group">
+                    <label for="province">Province <span>*</span></label>
+                    <select id="province" name="province" required onchange="updateMunicipalities()">
+                        <option value="" disabled selected>Select Province</option>
+                    </select>
+                </div> -->
+                <!-- Municipality Input -->
+                <!-- <div class="form-group">
+                    <label for="municipality">Municipality <span>*</span></label>
+                    <select id="municipality" name="municipality" required onchange="updateBarangays()">
+                        <option value="" disabled selected>Select Municipality</option>
+                    </select>
+                </div> -->
+                <!-- Barangay Input -->
+                <!-- <div class="form-group">
+                    <label for="barangay">Barangay <span>*</span></label>
+                    <select id="barangay" name="barangay" required>
+                        <option value="" disabled selected>Select Barangay</option>
+                    </select>
+                </div> -->
+                <!-- Address 1 Input -->
+                <div class="form-group">
+                    <label for="address1">Address<span>*</span></label>
+                    <input type="text" id="address1" name="address1"
+                        placeholder="Unit Number + House/Building/Street Number, Street Name" required>
+                </div>
+                <!-- Contact Number Input -->
+                <div class="form-group">
+                    <label for="contact">Contact Number <span>*</span></label>
+                    <input type="text" id="contact" maxlength="11" name="contact" placeholder="Ex. 09191234567"
+                        required>
+                </div>
+            </div>
+
+            <!-- Abroad -->
+            <div class="abroad" style="display: none;">
+                <h4>Abroad Shipping Details</h4>
+                <!-- Courier Input -->
+                <div class="form-group">
+                    <label for="courierAbroad">Courier <span>*</span></label>
+                    <select id="courierAbroad" name="courier">
+                        <option value="" disabled selected>Select Courier</option>
+                        <option value="LBC">LBC</option>
+                        <option value="FedEx">FedEx</option>
+                        <option value="Lalamove">Lalamove</option>
+                    </select>
+                </div>
+                <!-- Country Input -->
+                <div class="form-group">
+                    <label for="country">Country<span>*</span></label>
+                    <select id="country" name="country" required>
+                        <option value="" disabled selected>Select Country</option>
+                    </select>
+                </div>
+                <!-- State/Province/Region Input -->
+                <div class="form-group">
+                    <label for="STR">State/Province/Region <span>*</span></label>
+                    <input type="text" id="STR" name="STR" placeholder="Enter your state, province, or region" required>
+                </div>
+                <!-- City/Municipality Input -->
+                <div class="form-group">
+                    <label for="CM">City/Municipality <span>*</span></label>
+                    <input type="text" id="CM" name="CM" placeholder="Enter your city or municipality" required>
+                </div>
+                <!-- Street Address Input -->
+                <div class="form-group">
+                    <label for="SA">Street Address <span>*</span></label>
+                    <input type="text" id="SA" name="SA" placeholder="Enter your street address" required>
+                </div>
+                <!-- Contact Number Input -->
+                <div class="form-group">
+                    <label for="contactabroad">Contact Number <span>*</span></label>
+                    <input type="tel" id="contactabroad" name="contactabroad" placeholder="Ex. +639191234567" required>
+                </div>
+            </div>
+
+            <!-- For Pickup -->
+            <div class="for-pickup" style="display: none;">
+                <h4>For Pickup Details</h4>
+                <!-- Contact Number Input -->
+                <div class="form-group">
+                    <label for="contact-for-pickup">Contact Number <span>*</span></label>
+                    <input type="text" id="contact-for-pickup" maxlength="11" name="contact-for-pickup"
+                        placeholder="Ex. 09191234567" required>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+    <!-- Button Container -->
+    <div class="btns-container">
+        <!-- Go Back Button -->
+        <button class="back-button" type="button" onclick="window.history.back()">
+            <i class="fa-solid fa-caret-left"></i>
+            <span class="buttonText">Go Back</span>
+        </button>
+        <!-- Cancel Button -->
+        <button class="cancel-button" style="background-color: #9D4542; position: relative; left: 100px;" type="button"
+            onclick="cancel_session()">
+            <span class="buttonText">Cancel</span>
+        </button>
+        <!-- Submit Button -->
+        <button class="submit-button" type="submit" style="background-color: #699361;">Continue
+            <i class="fa-solid fa-caret-right"></i>
+        </button>
+    </div>
+</section>
+<!-- Footer Navigation Bar -->
+<nav class="footer-bar">
+    <div class="container-fluid">
+        <span class="navbar-text mx-auto">@ 2024 MSU-IIT Registrar</span>
+    </div>
+</nav>
+
+</html>

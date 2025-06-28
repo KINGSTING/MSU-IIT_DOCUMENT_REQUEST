@@ -1,0 +1,41 @@
+.body-container {
+    /* text-align: center; */
+    border: 2px solid #CEC9C9;
+    border-radius: 10px;
+    background-color: white;
+    padding: 30px 60px;
+    padding-bottom: 0;
+}
+
+.track-form {
+    display: flex;
+    align-items: center;
+}
+
+.track-form label {
+    width: 25%;
+    color: black;
+}
+
+.track-field {
+    width: 300px !important;
+}
+
+.track-submit {
+    text-align: center;
+}
+
+.track-back {
+    position: relative;
+    right: 258px;
+    margin-bottom: 20px;
+}
+
+.track-instruction {
+    font-size: 15px !important;
+}
+
+.expired {
+    color: red;
+    padding-bottom: 5px;
+}

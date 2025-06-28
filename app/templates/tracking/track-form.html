@@ -1,0 +1,48 @@
+{% extends "master.html" %} {% block title %}Tracking Request{%endblock %}
+
+{% block css %}
+    <link href="{{ url_for('static', filename='css/tracking/track-form.css') }}" rel="stylesheet">
+{% endblock css %}
+{% block js %}
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='js/tracking/track-general.js') }}" defer></script>
+{% endblock js %}
+
+
+{% block content %}
+    <section class="form-container">
+        <!-- Back Button here -->
+        <div class="submit-button-container track-back" onclick="window.location.href = 'http://127.0.0.1:5001/auth/login'">
+            <button class="submit-button back-button" type="button">
+                <i class="fa-solid fa-caret-left"></i>
+                Go Back
+            </button>
+        </div>
+        {% if status %}
+            <header class="track-instruction expired">Request Tracking Session Expired</header>
+        {% endif %}
+        <div class="body-container">
+            <div class="text-light"> 
+                <header class="track-instruction">To start tracking your request, please enter the required information.</header>
+            </div>
+            <form action="{{ url_for('track.track_form') }}" method="post" class="form" id="track_form">
+                <div class="input-box track-form">
+                    <label>Tracking Code:</label>
+                    <input type="text" name="tracking_code" class="track-field"/>
+                </div>
+
+                <div class="input-box track-form">
+                    <label>Student ID No:</label>
+                    <input type="text" name="student_id" class="track-field"/>
+                </div>
+            </form>
+    
+            <!-- Submit Button here -->
+            <div class="submit-button-container track-submit">
+                <button class="submit-button submit-form" type="button">Track Status
+                    <i class="fa-solid fa-caret-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+{% endblock content %}

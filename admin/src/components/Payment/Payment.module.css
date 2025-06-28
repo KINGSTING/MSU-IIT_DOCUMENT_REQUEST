@@ -1,0 +1,154 @@
+/* Container Sections */
+.payment_container {
+    max-width: 650px;
+    height: 490px;
+    margin: auto;
+    border-radius: 0 0 3px 3px;
+    background-color: #f0f0f0;
+    display: flex;
+    position: relative;
+    top: -490px;
+    transition: top 0.3s ease-in-out;
+}
+
+.payment_container.active {
+    top: 0px;
+}
+
+.breakdown_section {
+    height: 100%;
+    width: 334px;
+    border-right: 1px solid #A6A5A5;
+}
+
+.proof_section {
+    height: 100%;
+    flex: 1;
+}
+
+/* Info Sections */
+.section_header {
+    display: block;
+    height: 34px;
+    width: 95%;
+    margin: auto;
+    font-size: 16px;
+    padding-left: 10px;
+    padding-top: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #D2D5DC;
+}
+
+/* Breakdown Table */
+.breakdown_table {
+    display: block;
+    width: 90%;
+    margin: auto;
+    border: 1px solid #DAD8D1;
+    color: #444444;
+}
+
+.table_head,
+.table_total {
+    height: 34px;
+    display: flex;
+}
+
+.table_head span {
+    display: block;
+    font-weight: bold;
+    font-size: 13px;
+    padding-left: 8px;
+    padding-top: 8px;
+    border-right: 1px solid #DAD8D1;
+}
+
+.table_data {
+    display: flex;
+}
+
+.table_data span {
+    display: block;
+    font-size: 13px;
+    padding-left: 8px;
+    padding: 8px;
+    border-right: 1px solid #DAD8D1;
+    border-top: 1px solid #DAD8D1;
+}
+
+.table_head span:first-child,
+.table_data span:first-child {
+    width: 55%;
+}
+
+.table_head span:nth-child(2),
+.table_data span:nth-child(2) {
+    width: 20%;
+}
+
+.table_head span:nth-child(3),
+.table_data span:nth-child(3) {
+    border-right: none;
+    width: 25%;
+}
+
+/* Notes */
+.table_notes {
+    display: block;
+    width: 90%;
+    padding: 5px;
+    font-size: 12px;
+    margin: auto;
+    color: #444444;
+}
+
+.table_notes span {
+    float: right;
+}
+
+/* Table Total */
+.table_total span {
+    font-size: 13px;
+    padding-left: 8px;
+    padding-top: 8px;
+    background-color: hsl(43, 28%, 90%);
+}
+
+.table_total span:first-child {
+    font-weight: bold;
+    border-right: 2px solid #DAD8D1;
+    width: 75%;
+}
+
+.table_total span:nth-child(2) {
+    width: 25%;
+}
+
+/* Proof of Payment */
+.image_container {
+    display: block;
+    width: 90%;
+    height: 80%;
+    margin: auto;
+    border: 1px solid #DAD8D1;
+}
+
+/* Back Button */
+.back_button {
+    margin-right: 15px;
+    margin-top: 8px;
+    float: right;
+    font-size: 13px;
+    color: white;
+    height: 35px;
+    padding: 8px 12px;
+    outline: none;
+    border: 1px solid #A6A5A5;
+    background-color: #4E95CD;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.back_button:hover {
+    filter: brightness(0.8);
+}

@@ -1,0 +1,221 @@
+{% extends "small_master.html" %} {% block title %}Tracking Request{%endblock %}
+
+{% block css %}
+<link href="{{ url_for('static', filename='css/tracking/track-item.css') }}" rel="stylesheet">
+<link href="{{ url_for('static', filename='css/tracking/track-item-body.css') }}" rel="stylesheet">
+<link href="{{ url_for('static', filename='css/tracking/comment.css') }}" rel="stylesheet">
+{% endblock css %}
+
+{% block js %}
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+    crossorigin="anonymous"></script>
+<script src="{{ url_for('static', filename='js/tracking/track-item.js') }}" defer></script>
+{% endblock js %}
+
+{% block content %}
+<div class="body_container">
+    <div class="content_main">
+        <div class="content_status">
+            <span class="status_status {{ request[0].lower()+"_status" }}">
+                <span class="status-tag {{ request[0].lower() }}" style="border:none;">{{ request[0] }}</span>
+            </span>
+            <span class="status_message {{ request[0].lower() }}" style="border-left:none;">
+                {% if request[0] == 'Pending' %}
+                Your request is to be reviewed by an administrator personel.
+                {% endif %}
+                {% if request[0] == 'Clarifying' %}
+                Your request currently being clarified by an administrator personel.
+                {% endif %}
+                {% if request[0] == 'Processing' %}
+                Your request is now being processed by an administrator personel.
+                {% endif %}
+                {% if request[0] == 'Ready' and not request[7] == 'Within_Philippines' %}
+                Your request is now ready for pickup at the registrar office.
+                {% endif %}
+                {% if request[0] == 'Ready' and request[7] == 'Within_Philippines'%}
+                Your request has been shipped out with a shipping number <u><strong>{{request[16]}}</strong></u>
+                {% endif %}
+                {% if request[0] == 'Completed' %}
+                Your request has been completed, either claimed or recieved from shipping.
+                {% endif %}
+            </span>
+        </div>
+        <div class="content_container">
+            <div class="section">
+                <div class="section_header">
+                    <span>User Information</span>
+                    <span class="assigned">Assigned: <strong>{{ request[14] }}</strong></span>
+                </div>
+                <div class="section_data">
+                    <span class="data_label">Student ID Number</span>
+                    <span class="data_content">
+                        <strong>{{request[2]}}</strong>
+                    </span>
+                </div>
+                <div class="section_data">
+                    <span class="data_label">Full Name</span>
+                    <span class="data_content">
+                        <strong>{{request[3]}}</strong>
+                </div>
+                <div class="section_data">
+                    <span class="data_label">Category</span>
+                    <span class="data_content">{{request[1]}} Student</span>
+                </div>
+                <div class="section_data" style="border-bottom: 1px solid #DAD8D1;">
+                    <span class="data_label">E-mail</span>
+                    <span class="data_content email_address">
+                        {{request[4]}}
+                    </span>
+                </div>
+                <div class="section_data" style="margin-top: 10px;">
+                    <span class="data_label">Purpose</span>
+                    <span class="data_content">{{request[13]}}</span>
+                </div>
+                <div class="section_data">
+                    <span class="data_label">Date Requested</span>
+                    <span class="data_content">{{request[5].strftime("%B %d, %Y %I:%M %p")}}</span>
+                </div>
+                <div class="section_data">
+                    <span class="data_label">Date Updated</span>
+                    <span class="data_content">{{request[6].strftime("%B %d, %Y %I:%M %p")}}</span>
+                </div>
+            </div>
+            <div class="section">
+                <div class="section_header">
+                    <span>Documents Requested</span>
+                </div>
+                {% for document in documents %}
+                <div class="section_data" key={index}>
+                    <span class="document_label">Document {{ loop.index }}</span>
+                    <span class="document_content">
+                        <strong>{{document[0]}}</strong> <br />
+                        Copies: <strong>{{document[2]}}</strong>
+                        {% if document[3] != 'N/A, N/A' %}
+                        <br>
+                        Additional Info: <strong>{{document[3]}}</strong>
+                        {% endif %}
+                        {% if document[4] %}
+                        <br>
+                        File upload: <a href="{{ document[4] }}" target="_blank">Show File</a>
+                        {% endif %}
+                    </span>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="section">
+                <div class="section_header">
+                    <span>Receive Information</span>
+                </div>
+
+                {% if request[7] == 'For_Pickup' %}
+                <div class="section_data">
+                    <span class="data_label">Category</span>
+                    <span class="data_content"><strong>For Pickup</strong></span>
+                </div>
+                <div class="section_data">
+                    <span class="data_label">Contact Number</span>
+                    <span class="data_content">
+                        {{request[10]}}
+                    </span>
+                </div>
+                {% else %}
+                <div class="section_data">
+                    <span class="data_label">Category</span>
+                    {% if request[7] == 'Within_Philippines' %}
+                    <span class="data_content"><strong>Within Philippines</strong></span>
+                    {% else %}
+                    <span class="data_content"><strong>{{request[7]}}</strong></span>
+                    {% endif %}
+                </div>
+                <div class="section_data">
+                    <span class="data_label">Address</span>
+                    <span class="data_content">
+                        {% set address = request[9].split('[region]=') %}
+                        {{address[0]}}
+                    </span>
+                </div>
+                <div class="section_data">
+                    <span class="data_label">Contact Number</span>
+                    <span class="data_content">
+                        {{request[10]}}
+                    </span>
+                </div>
+                {% endif %}
+            </div>
+            <div class="section">
+                <div class="section_header">
+                    <span>Payment Information</span>
+                </div>
+                <div class="section_data" style="border-bottom: 1px solid #DAD8D1;">
+                    <span class="data_label"><strong>Proof of Payment</strong></span>
+                    <span class="data_content">
+                        <a href="{{request[12]}}" target='_blank'>Show Proof of Payment</a>
+                    </span>
+                </div>
+                <div class="subheader">Price Breakdown</div>
+                {% for document in documents %}
+                    <div class="section_data">
+                        <span class="data_label">{{ document[0] }}</span>
+                        <span class="data_content">Php {{ document[1] }}.00 {% if document[0] == 'Transcripts of Records' or document[5] == 'Authentication' %}/page{% endif %}</span>
+                    </div>
+                {% endfor %}
+                
+                {% if has_transcript %}
+                <div class="section_notes" style="border-top: 1px solid #D2D5DC;">
+                    <span>*TOR: {{ request[15] }} Pages</span>
+                    <span>Total: <strong>Php {{ 50*request[15] }}.00</strong></span>
+                </div>
+                {% endif %}
+                {% if request[7] == 'Within_Philippines' %}
+                <div class="section_notes" style="border-top: 1px solid #D2D5DC;">
+                    <span>*Shipping to:<strong>{{ address[1] }}</strong></span>
+                    <span>Price: <strong>Php {{ prices.get(address[1]) }}.00</strong></span>
+                </div>
+                {% endif %}
+                <div class="section_data">
+                    <span class="data_label"><strong>Total</strong></span>
+                    <span class="data_content total"><strong>Php {{ request[11] }}.00</strong></span>
+                </div>          
+            </div>
+        </div>
+
+    </div>
+    <div class="comments_main">
+        <div class="comments_container">
+            <div class="section">
+                {% if request[0] != 'Completed' %}
+                <form class="form_container">
+                    <input name="request_code" , value="{{ request_code }}" type="hidden">
+                    <input name="student_id" , value="{{ request[2] }}" type="hidden">
+                    <textarea class="comment_input" name="comment_body" rows="4"
+                        placeholder='Type comment here...'></textarea>
+                    <br />
+                    <span class="error_message hidden">Put error here</span>
+                    <button type="button" class="add_comment_button">Add Comment</button>
+                </form>
+                {% endif %}
+            </div>
+            <div class="section">
+                <div class="section_header">
+                    <span>All Comments ({{ comments|length }})</span>
+                </div>
+                <div class="comment_container">
+                    {% if comments|length == 0 %}
+                    <div class="empty_status">Comments Empty</div>
+                    {% else %}
+                    {% for comment in comments %}
+                    <div class="comment_item {{ comment[2] }}">
+                        <div class="comment_header">
+                            <span><strong>{{ comment[3] }}</strong></span>
+                            <span>{{ comment[4].strftime("%B %d, %Y %I:%M %p") }}</span>
+                        </div>
+                        {{ comment[1] }}
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

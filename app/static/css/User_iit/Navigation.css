@@ -1,0 +1,231 @@
+/* Header Section */
+.header_expand {
+    min-width: 1340px;
+}
+
+.header span {
+    text-align: center;
+    padding-top: 12px;
+}
+
+/* Notification Section */
+.notif_container {
+    width: 37px;
+    height: 100%;
+    cursor: pointer;
+    float: right;
+    display: flex;
+    position: relative;
+}
+
+/* Header Buttons */
+.collapse_button {
+    width: 37px;
+    height: 100%;
+    cursor: pointer;
+    float: left;
+}
+
+.account_button {
+    width: 183px;
+    height: 100%;
+    cursor: pointer;
+    float: right;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.account_button span {
+    margin-bottom: 25px;
+}
+
+.account_button img {
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+    margin-bottom: 12px;
+}
+
+.collapse_button:hover,
+.account_button:hover {
+    background-color: var(--secondary-red);
+}
+
+/* Account section */
+.account_container {
+    border: 1px solid white;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 130%;
+    height: 200px;
+    background-color: #f2d96a;
+    display: flex;
+    flex-direction: column;
+    color: var(--primary-black) !important;
+    box-shadow: 0 1px 3px;
+    border-radius: 0 0 3px 3px;
+}
+
+.account_container.hidden {
+    display: none;
+}
+
+.account_container:hover {
+    cursor: auto;
+}
+
+.account_container img {
+    width: 90%;
+    margin: auto;
+    padding: 0 60px;
+    padding-top: 10px;
+    height: 110px;
+}
+
+.account_name {
+    font-size: 16px;
+}
+
+.sign_out {
+    margin-top: -13px;
+    background-color: white;
+    border-radius: 0 0 2px 2px;
+    padding: 10px;
+}
+
+.sign_out button {
+    cursor: pointer;
+    padding: 5px 8px;
+}
+
+/* Navigation Section */
+.nav_visible {
+    width: 218px;
+}
+
+.nav_hidden {
+    width: 50px;
+}
+
+
+.logo_section {
+    height: 44px;
+    width: 100%;
+    background-color: var(--secondary-red);
+    text-align: center;
+}
+
+.logo_section img {
+    padding-top: 7px;
+    height: 35px;
+    width: 29px;
+}
+
+.profile {
+    height: 152px;
+    font-size: 12px;
+    color: #A6A5A5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    padding: 5px 0;
+}
+
+.profile img {
+    height: 99px;
+    width: 99px;
+    border-bottom: 5px;
+    margin-top: -30px;
+}
+
+.profile_collapsed {
+    height: 152px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    /* padding: 5px 0; */
+}
+
+.profile_collapsed img {
+    height: 30px;
+    width: 30px;
+    border-bottom: 5px;
+    position: relative;
+}
+
+.profile span {
+    position: absolute;
+    top: 135px;
+    overflow: hidden;
+    text-align: center;
+    font-size: 16px;
+    height: 50px;
+    padding-top: 15px;
+    width: 170px;
+    background-color: hsla(0, 0%, 20%, 0.5);
+}
+
+/* Options Section */
+.navigation {
+    font-size: 12.5px;
+    color: white;
+}
+
+.option {
+    height: 40px;
+    padding-left: 15px;
+    padding-top: 13px;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.option:hover {
+    color: var(--primary-yellow);
+}
+
+.option_label {
+    margin-right: 20px;
+    margin-left: 7px;
+}
+
+.option_label.selected {
+    color: var(--primary-yellow);
+}
+
+/* Main Option */
+.main_option {
+    background-color: var(--secondary-black);
+    color: var(--primary-yellow);
+}
+
+.main_option_collapsed {
+    background-color: var(--secondary-black);
+    color: var(--primary-yellow);
+}
+
+.collapse_option {
+    font-size: 13px;
+}
+
+/* Sub Options */
+.sub_option_container {
+    background-color: var(--tertiary-black);
+    overflow: hidden;
+    transition: max-height 0.5s ease-out;
+}
+
+.sub_option_container.expanded {
+    max-height: 120px;
+}
+
+.sub_option_container.collapsed {
+    max-height: 0;
+    padding: 0;
+}

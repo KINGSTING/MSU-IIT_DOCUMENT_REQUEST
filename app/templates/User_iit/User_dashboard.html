@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link href="{{ url_for('static', filename='css/User_iit/User_dashboard.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/User_iit/Navigation.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/User_iit/Main_page.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/User_iit/Content.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/User_iit/Notif.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/User_iit/Overlay.css') }}" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='js/User_iit/User_general.js') }}" defer></script>
+</head>
+
+<body>
+    <div class="global_container">
+        <div class="overlay-container">
+            <div class="overlay-background">
+                <button class="track_button back-overlay" onclick="closeOverlay()">Back</button>
+                <div class="iframe-container">
+                    <iframe class="cropped-iframe" src="{{ url_for('docu.document_page') }}" style="border:none;">
+                        Your browser does not support iframes.
+                    </iframe>
+                </div>
+            </div>
+        </div>
+        <!-- Navigation Section -->
+        <!-- Conditionally Collapse Navbar Visible: "nav_visible" Hidden: "nav_hidden"-->
+        <div class="nav_container">
+            <div class="logo_section">
+                <img src="{{ url_for('static', filename='images/iit-logo.png') }}" alt="IIT-Logo" style="cursor:pointer;" onclick="
+                    window.open('http://127.0.0.1:5001/auth/login')
+                "/>
+            </div>
+            <!-- Navigation Bar Here If navbar visible-->
+            <div class="profile">
+                <img src="{{ url_for('static', filename='images/profile_image.png') }}" alt="Profile Picture" />
+                <span>Sample User Name</span>
+            </div>
+            <!-- Options Section -->
+            <div class="navigation">
+                <!-- Main Option -->
+                <div class="main_option option" onClick="toggleExpand()">
+                    <span class="option_icon"><i class="fa fa-book" aria-hidden="true"></i></span>
+                    <span class="option_label">Online Document Request</span>
+                </div>
+            </div>
+            <!-- If Navbar is Collapsed -->
+            <!-- Collapsed nav  -->
+            <!-- <div class="profile_collapsed">
+                    <img src="{{ url_for('static', filename='images/profile_icon.png') }}" alt="Document Picture" />
+                </div>
+                <div class="navigation">
+                    <div class="main_option_collapsed option">
+                        <span class="option_icon"><i class=" fa fa-book" aria-hidden="true"></i></span>
+                    </div>
+                </div> -->
+        </div>
+        <!-- Conditionally Collapse Navbar -->
+        <!-- Header Section Expanded: "header_expand"-->
+        <div class="right_container">
+            <div class="header">
+                <span title="Collapse Sidebar" class="collapse_button" onClick="toggleNavbar()"><i class="fa fa-bars"
+                        aria-hidden="true"></i></span>
+                <span title="Account Info" class="account_button" onClick="toggleAccount()">
+                    <img src="{{ url_for('static', filename='images/profile_icon.png') }}" alt="Profile Image" />
+                    <span>{{ student.first_name|upper }} </span>
+                    <input class='student_id' value={{ student_id }} hidden>
+                    <!-- Conditionally Collapse User Account -->
+                    <div class="account_container hidden">
+                        <img src="{{ url_for('static', filename='images/profile_icon.png') }}" alt="Profile image" />
+                        <span class="account_name">{{ student.first_name|upper }} {{ student.last_name|upper }}</span>
+                        <span class="sign_out">
+                            <button onClick="handleSignOut()">Sign-out</button>
+                        </span>
+                    </div>
+                </span>
+                <div class="notif_container">
+                    <span title="Open Notifications" class="notif_button" onclick="toggleNotif()">
+                        <!-- Toggle View all when opened -->
+                        <i class="fa fa-bell" aria-hidden="true"></i>
+                        <!-- Show notif Count Conditionally -->
+                         {% if unread_count>0  %}
+                        <span class="notif_count">
+                            {{ unread_count }}
+                        </span>  
+                         {% endif %}                      
+                    </span>
+                    <!-- Conditionally show notifications -->
+                    <div class="notification_container hidden">
+                        <div class="notification_header">
+                            Notifications ({{ notif|length }})
+                        </div>
+                        <div class="item_container">
+                            <!-- If notifications is empty -->
+                            <!-- <div>No notifications</div> -->
+
+                            <!-- If not empty -->
+                            <!-- Map Here -->
+                            <!-- Special class for read items -->
+                            {% for notification in notif %}
+                            <div class="notification_item {{'new' if not notification['read_status'] }}"
+                                onClick="handleNotificationClick(event, {{ notification['notification_id'] }}, {{ notification['request_id'] }})">
+                                <div class="message_header">
+                                    <span>Admin:<strong>{{ notification['last_name'] }}</strong></span>
+                                    <span style="font-size: 8.5px;">{{ notification['notification_datetime'] }}</span>
+                                </div>
+                                <span class="message">{{ notification['notification_body'] }}</span>
+                            </div>
+                            {% endfor %}
+                            {% if not notif %}
+                            No notifications
+                            {% endif %}
+                        </div>
+                        <div class="notification_footer">
+                            <!-- Toggle View all -->
+                            <span class="expand_notification" onClick="toggleViewAll()">
+                                <!-- Alt is "Show fewer" -->
+                                View all notifications
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="outlet_container">
+                <div class="flash_container">
+                    <!-- Conditionally Render Flash -->
+                </div>
+                <div class="page_title">Online Document Request {% if with_liabilities %}
+                    <span class="title-liabilities"><a href="https://myiit.msuiit.edu.ph/my/v2/student/clearance.php?ref=left-menu" target="_blank">You have pending liabilities. Resolve them first to start creating a request.</a></span>
+                    {% endif %}
+                </div>
+                <div class="body_container">
+                    <div class="header_container">
+                        <span class="title">All Requests</span>
+                        {% if with_liabilities %}
+                        <button class="new_request_button disabled" onclick="submitNewRequest()" disabled>Submit New Request <i class="fa fa-plus-circle"
+                            aria-hidden="true" ></i>
+                        </button>
+                        {% else %}
+                        <button class="new_request_button" onclick="submitNewRequest()" >Submit New Request <i class="fa fa-plus-circle"
+                            aria-hidden="true" ></i>
+                        </button>
+                        {% endif %}
+                    </div>
+                    <div class="search_container">
+                        <span class="key_search">
+                            <label htmlFor="keyword_search">Search Keywords:</label>
+                            <input type="text" name="keyword" onChange="handleSearchChange()"
+                                placeholder='Enter search term in real time' />
+                            <button title='Clear search' onClick="handleClear()">Clear</button>
+                        </span>
+                        <span class="filter_search">
+                            <label htmlFor="filter">Sort By:</label>
+                            <select name="filter" value={{filterTerm}} onChange="handleFilterChange()">
+                                <option value="Default">Default</option>
+                                <option value="1">Full Name</option>
+                                <option value="2">Requested Documents</option>
+                                <option value="3">Receive Type</option>
+                                <option value="4">Date of Request</option>
+                                <option value="5">Assigned</option>
+                                <option value="6">Status</option>
+                            </select>
+                        </span>
+                    </div>
+
+                    <div class="table_container">
+                        <div class="data_container">
+                            <div class="table_head">
+                                <span>Full Name</span>
+                                <span>Requested Documents</span>
+                                <span>Receive Type</span>
+                                <span>Date of Request</span>
+                                <span>Assigned</span>
+                                <span>Status</span>
+                                <span></span>
+                            </div>
+                            <!-- Map Here -->
+                            {% for request in data %}
+                            <div class="table_data">
+                                <span>{{ request['last_name'] }}, {{ request['first_name'] }}</span>
+                                <span>{{ request['requested_documents'] }}</span>
+                                <span>{{ request['receive_type'] }}</span>
+                                <span>{{ request['date_of_request'] }}</span>
+                                <span>{{ request['assigned'] }}</span>
+                                <span class={{request['status'].lower()}}><strong>{{ request['status'].upper()
+                                        }}</strong></span>
+                                <span>
+                                    <button class="track_button" onclick="trackRequest({{ request['request_id'] }})">Full Details</button>
+                                </span>
+                            </div>
+                            {% endfor %}
+                            {% if not data %}
+                            <div class="empty_data">
+                                Requests Empty
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+
+</html>

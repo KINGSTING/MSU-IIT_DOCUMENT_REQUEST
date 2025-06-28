@@ -1,0 +1,55 @@
+{% extends "master.html" %} {% block title %}Tracking Request - Invalid{%endblock %}
+
+{% block js %}
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='js/tracking/track-general.js') }}" defer></script>
+{% endblock js %}
+
+{% block content %}
+    <!-- Go Back Button -->
+    <div class="button-container">
+        {% if type == 'Invalid Code' %}
+            <button class="back-button back-invalid" type="button">
+                <i class="fa-solid fa-caret-left"></i>
+                <span class="buttonText">Go Back</span>
+            </button>
+        {% endif %}
+        
+    </div>
+
+    <section class="box">
+        <!-- Validation Title/Header here -->
+        <div class="fw-bolder">
+            {% if type == 'Invalid ID' %}
+                <header>INVALID STUDENT ID</header>
+            {% endif %}
+            {% if type == 'Invalid Code' %}
+                <header>INVALID TRACKING CODE</header>
+            {% endif %}
+            
+        </div>
+
+        <!-- Validation Body Message here -->
+        <div class="text-light"> 
+            {% if type == 'Invalid ID' %}
+                <p>The student ID you entered does not exists in the student records.</p>
+            {% endif %}
+            {% if type == 'Invalid Code' %}
+                <p>The tracking code you entered does not match any ongoing reqeuests.</p>
+            {% endif %}
+        </div>    
+
+        <!-- Redirection Button here -->
+        <div class="no-border-button">
+            {% if type == 'Invalid Code' %}
+                <button type="button"> <a href="https://gmail.com/" target="_blank">Go to G-mail</a>
+                </button>
+            {% endif %}
+            {% if type == 'Invalid ID' %}
+                <button class="back-invalid" type="button" onclick="window.location.href = 'http://127.0.0.1:5001/tracking/form'">
+                    <span class="buttonText">Go Back</span>
+                </button>
+            {% endif %}
+        </div> 
+    </section>
+{% endblock content %}

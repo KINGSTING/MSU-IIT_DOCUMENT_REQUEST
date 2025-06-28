@@ -1,0 +1,421 @@
+/* General styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.shipping-form-container {
+    width: 84%;
+    margin: 0 auto;
+    /* Removes top margin */
+    background-color: #F1F1F1;
+    padding: 0px;
+    border-radius: 8px;
+    box-shadow: 0 0 0px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Form styling */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+select,
+input[type="text"],
+input[type="tel"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #333;
+}
+
+select:focus,
+input[type="text"]:focus,
+input[type="tel"]:focus {
+    border-color: #ff9900;
+    outline: none;
+}
+
+/* Button styling */
+.btns-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.back-button {
+    background-color: #dcdcdc;
+    color: #333;
+    display: flex;
+    align-items: center;
+}
+
+.cancel-button {
+    background-color: #ff4c4c;
+    color: #fff;
+    transform: translateX(-20px);
+    /* Adjust the value as needed */
+}
+
+.submit-button {
+    background-color: #ff9900;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateX(-20px);
+    /* Adjust the value as needed */
+}
+
+button i {
+    margin-right: 8px;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .shipping-form-container {
+        width: 90%;
+    }
+
+    .btns-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .btns-container button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+.shipping-form {
+    margin-top: 20px;
+}
+
+h2 {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group label span {
+    color: red;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-group input::placeholder {
+    color: #999;
+}
+
+.shipping-category {
+    background-color: #F1F1F1;
+    /* Light background */
+    padding: 20px;
+    /* Compact padding */
+    padding-top: 30px;
+    /* No padding at the bottom */
+    padding-bottom: 0;
+    /* No padding at the bottom */
+    font-family: Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* Space between text and radio buttons */
+    width: 100%;
+    /* Full width container */
+}
+
+
+.shipping-category span {
+    font-size: 15px;
+    color: #333;
+    /* Text color */
+}
+
+.shipping-category label {
+    font-size: 15px;
+    /* Text size */
+    font-weight: normal;
+    /* Remove boldness from the label text */
+    margin-right: 15px;
+    /* Space between labels */
+    display: inline-block;
+}
+
+.shipping-category input[type="radio"] {
+    margin-right: 5px;
+    /* Space between radio and label */
+    accent-color: maroon;
+    /* Maroon color for radio buttons */
+    cursor: pointer;
+}
+
+.within-Philippines {
+    background-color: #F1F1F1;
+    /* Light grey background */
+    padding: 15px;
+    margin-top: 20px;
+    margin-bottom: 105px;
+    border-radius: 8px;
+    display: none;
+    /* Initially hidden, will be shown via JavaScript */
+}
+
+.within-Philippines h4 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    color: #9D4542;
+    /* Dark Red */
+}
+
+.within-Philippines h4::after {
+    content: "";
+    flex-grow: 1;
+    border-bottom: 2px solid #9D4542;
+    /* Matching color for underline */
+    margin-left: 10px;
+    /* Space between text and line */
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #9D4542;
+    /* Focus color */
+    outline: none;
+}
+
+.abroad {
+    background-color: #F1F1F1;
+    /* Light grey background */
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 8px;
+    display: none;
+    /* Initially hidden, will be shown via JavaScript */
+}
+
+.abroad h4 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    color: #9D4542;
+    /* Dark Red for contrast */
+}
+
+.abroad h4::after {
+    content: "";
+    flex-grow: 1;
+    border-bottom: 2px solid #9D4542;
+    /* Matching the color of the text */
+    margin-left: 10px;
+    /* Space between the text and the line */
+}
+
+.abroad .form-group {
+    margin-bottom: 15px;
+}
+
+.abroad .form-group label {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.abroad .form-group input,
+.abroad .form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #333;
+}
+
+.abroad .form-group input::placeholder {
+    color: #999;
+}
+
+/* Make form interactive, with focus styles */
+.abroad .form-group input:focus,
+.abroad .form-group select:focus {
+    border-color: #ff9900;
+    outline: none;
+}
+
+.abroad .form-group select {
+    cursor: pointer;
+}
+
+/* Adjust layout for small screens */
+@media (max-width: 768px) {
+    .abroad {
+        width: 90%;
+        margin: 0 auto;
+    }
+}
+
+.for-pickup {
+    background-color: #F1F1F1;
+    /* Light grey background */
+    padding: 15px;
+    margin-top: 20px;
+    margin-bottom: 200px;
+    border-radius: 8px;
+    display: none;
+    /* Initially hidden, will be shown via JavaScript */
+}
+
+.for-pickup h4 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    color: #9D4542;
+    /* Dark Red for contrast */
+}
+
+.for-pickup h4::after {
+    content: "";
+    flex-grow: 1;
+    border-bottom: 2px solid #9D4542;
+    /* Matching the color of the text */
+    margin-left: 10px;
+    /* Space between the text and the line */
+}
+
+.for-pickup .form-group {
+    margin-bottom: 15px;
+}
+
+.for-pickup .form-group label {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.for-pickup .form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #333;
+}
+
+.for-pickup .form-group input::placeholder {
+    color: #999;
+}
+
+/* Make form interactive, with focus styles */
+.for-pickup .form-group input:focus {
+    border-color: #ff9900;
+    outline: none;
+}
+
+/* Adjust layout for small screens */
+@media (max-width: 768px) {
+    .for-pickup {
+        width: 90%;
+        margin: 0 auto;
+    }
+}
+
+.flash {
+    animation: flash-animation 0.3s ease-out;
+}
+
+@keyframes flash-animation {
+    0% {
+        background-color: #ffcc00;
+        /* Flash color (you can choose any color) */
+    }
+
+    50% {
+        background-color: #f1f1f1;
+        /* Normal color */
+    }
+
+    100% {
+        background-color: #ffcc00;
+        /* Flash color (same as at 0%) */
+    }
+}

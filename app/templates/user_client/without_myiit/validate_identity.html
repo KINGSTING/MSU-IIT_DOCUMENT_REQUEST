@@ -1,0 +1,191 @@
+<!-- {% extends "templates/master.html" %} -->
+<!-- use this when flask is set up -->
+<!-- use 'url_for' to properly reference the logo image file -->
+
+<!-- {% block title %} {{page_title}} {% endblock %} -->
+
+<!-- THIS IS THE MASTER TEMPLATE..JUST IGNORE -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@100;300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="/app/static/css/master.css" rel="stylesheet">
+    
+</head>   
+<body>
+
+    <!-- Header Navigation Bar -->
+    <header class="site-header">
+        <nav class="navbar">
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main role="main" class="container">
+      <img class="image-center" width="350" height="53" src="../../../static/images/msuiit_registrar_logo.png" alt="MSU-IIT Registrar Logo"> 
+      <hr class="margin-line" width="95%" size="1" style="margin: 12px auto;" color="#A6A5A5" > 
+    </main>
+
+    <!-- Footer Navigation Bar -->
+    <nav class= "footer-bar">
+      <div class="container-fluid">
+          <span class="navbar-text mx-auto">@ 2024 MSU-IIT Registrar</span>
+      </div>
+    </nav>  
+
+</body>
+</html>
+<!-- THIS IS THE MASTER TEMPLATE..JUST IGNORE -->
+
+
+<!-- ACTUAL CONTENT -->
+<!-- {% block content %} -->
+
+    <section class="form-container">
+        <div class="text-light"> 
+            <header>Please enter your additional information to validate your identity.</header>
+        </div>
+                <form action="#" class="form">
+                    <div class="input-box">
+                        <label>First Name</label>
+                        <input type="text" />  
+                    </div>
+
+                    <div class="input-box">
+                        <label>Last Name</label>
+                        <input type="text" />
+                    </div>
+
+                    <!-- Birthday Dropdown Menu -->
+                    <!-- Month Options -->
+                    <div class="input-box">
+                        <label>Birthday</label>
+                        <div class="column">
+                            <div class="input-box">
+                                <select>
+                                    <option value="" disabled selected>Month</option>
+                                    <option>January</option>
+                                    <option>February</option>
+                                    <option>March</option>
+                                    <option>April</option>
+                                    <option>May</option>
+                                    <option>June</option>
+                                    <option>July</option>
+                                    <option>August</option>
+                                    <option>September</option>
+                                    <option>October</option>
+                                    <option>November</option>
+                                    <option>December</option>
+                                </select>
+                                
+                            </div>
+                            <!-- Day Options -->
+                            <div class="input-box">
+                                <select>
+                                    <option value="" disabled selected>Day</option>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option>7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                    <option>10</option>
+                                    <option>11</option>
+                                    <option>12</option>
+                                    <option>13</option>
+                                    <option>14</option>
+                                    <option>15</option>
+                                    <option>16</option>
+                                    <option>17</option>
+                                    <option>18</option>
+                                    <option>19</option>
+                                    <option>20</option>
+                                    <option>21</option>
+                                    <option>22</option>
+                                    <option>23</option>
+                                    <option>24</option>
+                                    <option>25</option>
+                                    <option>26</option>
+                                    <option>27</option>
+                                    <option>28</option>
+                                    <option>29</option>
+                                    <option>30</option>
+                                    <option>31</option>
+                                </select>
+                                
+                            </div>
+                            <!-- Year Options -->
+                            <div class="input-box">
+                                <select>
+                                    <option value="" disabled selected>Year</option>
+                                    <option>1980</option>
+                                    <option>1981</option>
+                                    <option>1982</option>
+                                    <option>1983</option>
+                                    <option>1984</option>
+                                    <option>1985</option>
+                                    <option>1986</option>
+                                    <option>1987</option>
+                                    <option>1988</option>
+                                    <option>1989</option>
+                                    <option>1990</option>
+                                    <option>1991</option>
+                                    <option>1992</option>
+                                    <option>1993</option>
+                                    <option>1994</option>
+                                    <option>1995</option>
+                                    <option>1996</option>
+                                    <option>1997</option>
+                                    <option>1998</option>
+                                    <option>1999</option>
+                                    <option>2000</option>
+                                    <option>2001</option>
+                                    <option>2002</option>
+                                    <option>2003</option>
+                                    <option>2004</option>
+                                    <option>2005</option>
+                                    <option>2006</option>
+                                    <option>2007</option>
+                                    <option>2008</option>
+                                    <option>2009</option>
+                                    <option>2010</option>
+                                    <option>2011</option>
+                                    <option>2012</option>
+                                    <option>2013</option>
+                                    <option>2014</option>
+                                    <option>2015</option>
+                                    <option>2016</option>
+                                    <option>2017</option>
+                                    <option>2018</option>
+                                    <option>2019</option>
+                                    <option>2020</option>
+                                    <option>2021</option>
+                                    <option>2022</option>
+                                    <option>2023</option>
+                                    <option>2024</option>
+                                </select>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Submit Button here  -->
+                <div class="submit-button-container">
+                    <button class="submit-button" type="button">Submit
+                        <i class="fa-solid fa-caret-right"></i>
+                    </button>
+                </div>
+    </section>
+
+
+
+<!-- {% endblock %} -->

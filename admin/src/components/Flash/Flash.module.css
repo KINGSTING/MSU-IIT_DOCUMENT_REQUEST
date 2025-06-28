@@ -1,0 +1,30 @@
+.flash_box {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    padding: 8px 10px;
+    border-radius: 3px;
+}
+
+.flash_box.loading {
+    border: 2px solid var(--border-grey);
+    color: var(--primary-black);
+    background-color: hsla(0, 1%, 65%, 0.2);
+}
+
+.flash_box.success {
+    border: 2px solid var(--completed);
+    color: var(--completed);
+    background-color: hsla(111, 34%, 55%, 0.2);
+}
+
+.flash_box.error {
+    border: 2px solid var(--clarifying);
+    color: var(--clarifying);
+    background-color: hsla(2, 50%, 55%, 0.2);
+}
+
+.flash_box.updates {
+    border: 2px solid var(--ready);
+    color: var(--ready);
+    background-color: hsla(35, 73%, 55%, 0.2);
+}

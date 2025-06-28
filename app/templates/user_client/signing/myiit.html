@@ -1,0 +1,102 @@
+{% extends "master.html" %}
+
+{% block title %}With my-IIT{% endblock %}
+
+{% block content %} 
+
+<script>
+    function Submit() {
+        
+        const emailInput = document.getElementById('emailInput');
+        const passwordInput = document.getElementById('passwordInput');
+        const emailError = document.getElementById('emailError');
+        const passwordError = document.getElementById('passwordError');
+
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        let isValid = true;
+        if (!emailInput.value || !emailRegex.test(emailInput.value)) {
+            emailInput.classList.add('invalid');
+            emailError.style.display = 'inline';
+            isValid = false;
+        } else {
+            emailInput.classList.remove('invalid');
+            emailError.style.display = 'none';
+        }
+        if (!passwordInput.value) {
+            passwordInput.classList.add('invalid');
+            passwordError.style.display = 'inline';
+            isValid = false;
+        } else {
+            passwordInput.classList.remove('invalid');
+            passwordError.style.display = 'none';
+        }
+        if (!isValid) {
+            return;
+        }
+
+
+        fetch(
+            "myiit",
+            {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    'email': emailInput.value,
+                    'password': passwordInput.value
+                })
+            }
+        )
+        .then(response => response.json())
+        .then(data => {
+            if (data.redirect) {
+                if (data.message) {
+                    
+                }
+                window.location.href = data.redirect;
+            } 
+            if (data.error) {
+                alert("Wrong email or password");
+            }
+        })
+        .catch(err =>{ console.log(err)})
+    }
+</script>
+<div class="button-container">
+    <button class="back-button" type="button" onclick="window.history.back()">
+        <i class="fa-solid fa-caret-left"></i>
+        <span class="buttonText">Go Back</span>
+    </button>
+</div>
+<section class="form-container">
+    <div class="text-light"> 
+        <header>My.IIT Login Page</header>
+    </div>
+    
+            <form action="#" class="form">
+                <div class="input-box username">
+                    <label>EMAIL</label>
+                    <input type="text" id="emailInput"/>
+                    <span class="error" id="emailError">Please enter a valid email.</span>
+                    <div class="text-light">
+                        <small><i>Ex. zachdavid.maregmen@gmail.ph</i></small>
+                    </div>
+                </div>
+
+                <div class="input-box password">
+                    <label>PASSWORD</label>
+                    <input type="password" id="passwordInput"/>
+                    <span class="error" id="passwordError">Invalid Password</span>
+                    <div class="text-light">
+                    </div>
+                </div>
+            </form>
+
+        <!-- Submit Button here -->
+             <div class="submit-button-container">
+                <button class="submit-button" type="button" onclick="Submit()">Submit
+                    <i class="fa-solid fa-caret-right"></i>
+                </button>
+            </div>
+
+</section>
+{% endblock %}

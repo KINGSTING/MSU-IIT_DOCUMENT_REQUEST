@@ -1,0 +1,97 @@
+/* Info Sections */
+.section {
+    margin-bottom: 5px;
+}
+
+.section_header {
+    height: 34px;
+    font-size: 14px;
+    padding-left: 10px;
+    padding-top: 10px;
+    margin: auto;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #D2D5DC;
+    font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.assigned {
+    font-size: 11px;
+    float: right;
+    margin-right: 10px;
+}
+
+.assigned strong {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.section_data {
+    width: 95%;
+    margin: auto;
+    border: 1px solid #DAD8D1;
+    display: flex;
+    border-bottom: none;
+}
+
+.section_data:last-child {
+    border-bottom: 1px solid #DAD8D1;
+}
+
+.data_label {
+    font-size: 12px;
+    width: 38%;
+    background-color: #F6F4EE;
+    padding: 7px;
+    padding-left: 5px;
+    border-right: 1px solid #DAD8D1;
+}
+
+.data_content {
+    font-size: 13px;
+    width: 62%;
+    padding: 5px;
+    padding-left: 5px;
+    word-wrap: break-word;
+}
+
+.copy_clipboard {
+    cursor: pointer;
+}
+
+/* Documents data and label */
+.document_label {
+    font-size: 12px;
+    width: 113px;
+    background-color: #F6F4EE;
+    padding: 7px;
+    padding-left: 5px;
+    border-right: 1px solid #DAD8D1;
+}
+
+.document_content {
+    line-height: 18px;
+    font-size: 13px;
+    width: 187px;
+    padding: 5px 0;
+    padding-left: 5px;
+}
+
+/* Payment Button */
+.show_payment {
+    font-size: 10px;
+    color: #8F8989;
+    height: 29px;
+    padding: 5px 7px;
+    outline: none;
+    border: 1px solid #A6A5A5;
+    border-radius: 3px;
+    cursor: pointer;
+    float: right;
+    position: relative;
+    bottom: 8px;
+    right: 8px;
+}
+
+.show_payment:hover {
+    background-color: hsl(0, 1%, 85%);
+}

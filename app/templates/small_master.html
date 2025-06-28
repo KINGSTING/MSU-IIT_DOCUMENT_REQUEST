@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Official registrar page of MSU-IIT for document requests.">
+    <meta name="author" content="MSU-IIT Registrar">
+    <title>{% block title %}{% endblock %}</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@100;300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="{{ url_for('static', filename='css/small_master.css') }}" rel="stylesheet">
+    <script src="{{ url_for('static', filename='js/master.js') }}" defer></script>
+
+    <!-- BY:Jemar Font Awesome for Icons -->
+    <!--
+        <link href="{{ url_for('static', filename='css/document.css') }}" rel="stylesheet">
+        <script src="{{ url_for('static', filename='js/index.js') }}" defer></script>
+        <script src="{{ url_for('static', filename='js/document.js') }}" defer></script>
+    -->
+
+    {% block css %}{% endblock css %}
+    {% block js %}{% endblock js %}
+
+</head> 
+<body>
+    
+    <!-- Header Navigation Bar -->
+    <header class="site-header">
+        <nav class="navbar">
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main role="main" class="container">
+        <img class="image-center" width="350" height="53" src="{{ url_for('static', filename='images/msuiit_registrar_logo.png') }}" alt="MSU-IIT Registrar Logo"> 
+        <hr class="margin-line" width="95%" size="1" style="margin: 12px auto;" color="#A6A5A5"> 
+      </main>
+
+    {% block content %}{% endblock %}
+
+    <!-- Footer Navigation Bar -->
+    <nav class= "footer-bar">
+        <div class="container-fluid">
+            <span class="navbar-text mx-auto"></span>
+        </div>
+    </nav>
+    
+</body>
+</html>

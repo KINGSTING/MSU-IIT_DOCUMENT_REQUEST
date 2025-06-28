@@ -1,0 +1,52 @@
+.overlay-container {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    z-index: 2;
+}
+
+.overlay-background {
+    width: inherit;
+    height: inherit;
+    position: inherit;
+    background-color: hsla(0, 0%, 20%, 0.3);
+}
+
+.iframe-container {
+    width: 90%;
+    margin: auto;
+    height: 90%;
+    margin-top: 5%;
+    overflow: hidden;
+    position: relative;
+    border-radius: 10px;
+    clip-path: inset(0 100px 50px 100px);
+    /* Top, Right, Bottom, Left cropping */
+}
+
+.overlay-container.visible {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+.cropped-iframe {
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    /* Match the container's size */
+    height: 100%;
+    border-radius: 20px;
+}
+
+.back-overlay {
+    z-index: 2;
+    position: absolute;
+    left: 175px;
+    top: 10px;
+    background-color: hsl(0, 1%, 73%);
+    cursor: pointer;
+}
+
+.back-overlay:hover {
+    background-color: hsl(0, 1%, 53%);
+}

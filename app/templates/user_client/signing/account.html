@@ -1,0 +1,106 @@
+{% extends "master.html" %}
+
+{% block title %}Without my-IIT{% endblock %}
+
+{% block content %}
+
+<script>
+    function Submit() {
+        const emailInput = document.getElementById('email');
+        const idNumberInput = document.getElementById('id_number');
+        const emailError = document.getElementById('emailError');
+        const idNumberError = document.getElementById('idNumberError');
+
+        const idNumberRegex = /^\d{4}-\d{4}$/;
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        let isValid = true;
+        if (!emailInput.value || !emailRegex.test(emailInput.value)) {
+            emailInput.classList.add('invalid');
+            emailError.style.display = 'inline';
+            isValid = false;
+        } else {
+            emailInput.classList.remove('invalid');
+            emailError.style.display = 'none';
+        }
+        if (!idNumberRegex.test(idNumberInput.value)) {
+            idNumberInput.classList.add('invalid');
+            idNumberError.style.display = 'inline';
+            isValid = false;
+        } else {
+            idNumberInput.classList.remove('invalid');
+            idNumberError.style.display = 'none';
+        }
+        if (!isValid) {
+            return;
+        }
+
+
+        fetch(
+            "verify_email",
+            {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    'email': emailInput.value,
+                    'id_number': idNumberInput.value
+                })
+            }
+        )
+        .then(response => response.json())
+        .then(data => {
+            if (data.redirect) {
+                if (data.message) {
+                    
+                }
+                window.location.href = data.redirect;
+            } 
+            if (data.error) {
+                alert('The verification code was not sent')
+            }
+        })
+        .catch(err =>{ console.log(err)})
+    }
+</script>
+
+
+<div class="button-container">
+    <button class="back-button" type="button" onclick="window.history.back()">
+        <i class="fa-solid fa-caret-left"></i>
+        <span class="buttonText">Go Back</span>
+    </button>
+</div>
+
+
+<section class="form-container">
+    <div class="text-light"> 
+        <header>Please enter your Student ID number and email below.</header>
+    </div>
+            <form action="#" class="form" method="POST">
+                <div class="input-box id-number">
+                    <label>STUDENT ID</label>
+                    <input type="text" name="id_number" id="id_number"/>
+                    <span class="error" id="idNumberError">Please enter a valid id number.</span>
+                    <div class="text-light">
+                        <small><i>Ex. 2024-1342</i></small>
+                    </div>    
+                </div>
+
+                <div class="input-box email">
+                    <label>EMAIL</label>
+                    <input type="text" id="email" type="email"/>
+                    <span class="error" id="emailError">Please enter a valid email.</span>
+                    <div class="text-light">
+                        <small><i>Ex. sample@gmail.com</i></small>
+                    </div>
+                </div>
+            </form>
+
+        <!-- Submit Button here -->
+             <div class="submit-button-container">
+                <button class="submit-button" type="submit" name="action" onclick="Submit()">Submit
+                    <i class="fa-solid fa-caret-right"></i>
+                </button>
+            </div>
+
+</section>
+{% endblock %}

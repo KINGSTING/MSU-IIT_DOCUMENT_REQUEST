@@ -1,0 +1,80 @@
+{% extends "master.html" %}
+
+{% block title %}Confirm Code{% endblock %}
+
+{% block content %}
+
+<script>
+    function Submit() {
+        const codeInput = document.getElementById('codeInput');
+        const codeError = document.getElementById('codeError');
+        const codeInvalid = document.getElementById('codeInvalid');
+        const codeRegex = /^\d{6}$/;
+
+        isValid = true
+
+        if (!codeRegex.test(codeInput.value)) {
+            codeInput.classList.add('invalid');
+            codeError.style.display = 'inline';
+            isValid = false;
+        } else {
+            codeInput.classList.remove('invalid');
+            codeError.style.display = 'none';
+        }
+        if (!isValid) {
+            return;
+        }
+
+
+        fetch(
+            "verify_code",
+            {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    'code': codeInput.value
+                })
+            }
+        )
+        .then(response => response.json())
+        .then(data => {
+            if (data.redirect) {
+                window.location.href = data.redirect;
+            } 
+            if (data.invalid) {
+                console.log("invalid")
+                codeInput.classList.add('invalid');
+                codeInvalid.style.display = 'inline';
+            }
+        })
+        .catch(err =>{ console.log(err)})
+    }
+</script>
+
+<section class="form-container">
+    <div class="button-container" style="position:relative; right:357px; bottom: 85px;">
+        <button class="back-button" type="button" onclick="window.history.back()">
+            <i class="fa-solid fa-caret-left"></i>
+            <span class="buttonText">Go Back</span>
+        </button>
+    </div>
+
+    <div class="text-light"> 
+        <header>Please enter the 6-digit verification code sent to your email address.</header>
+    </div>
+            <form action="#" class="form">
+                <div class="input-box code">
+                    <input type="text" id="codeInput"/>  
+                </div>
+                <span class="error" id="codeInvalid">Code is Invalid..</span>
+                <span class="error" id="codeError">Code must be a 6 digit number..</span>
+            </form>
+            
+        <!-- Submit Button here -->
+        <div class="submit-button-container">
+            <button class="submit-button" type="button" onclick="Submit()">Submit
+                <i class="fa-solid fa-caret-right"></i>
+            </button>
+        </div>
+</section>
+{% endblock %}

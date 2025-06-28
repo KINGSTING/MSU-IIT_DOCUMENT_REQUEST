@@ -1,0 +1,75 @@
+<!-- {% extends "templates/master.html" %} -->
+<!-- use this when flask is set up -->
+<!-- use 'url_for' to properly reference the logo image file & master.css file -->
+
+<!-- {% block title %} {{page_title}} {% endblock %} -->
+
+<!-- THIS IS THE MASTER TEMPLATE..JUST IGNORE -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@100;300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="/app/static/css/master.css" rel="stylesheet">
+    
+</head>   
+<body>
+
+    <!-- Header Navigation Bar -->
+    <header class="site-header">
+        <nav class="navbar">
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main role="main" class="container">
+      <img class="image-center" width="350" height="53" src="../../../static/images/msuiit_registrar_logo.png" alt="MSU-IIT Registrar Logo"> 
+      <hr class="margin-line" width="95%" size="1" style="margin: 12px auto;" color="#A6A5A5" > 
+    </main>
+
+    <!-- Footer Navigation Bar -->
+    <nav class= "footer-bar">
+      <div class="container-fluid">
+          <span class="navbar-text mx-auto">@ 2024 MSU-IIT Registrar</span>
+      </div>
+    </nav>  
+
+</body>
+</html>
+<!-- THIS IS THE MASTER TEMPLATE..JUST IGNORE -->
+
+
+
+<!-- ACTUAL CONTENT -->
+<!-- {% block content %} -->
+
+<!-- Go Back Button -->
+<div class="button-container">
+    <button class="back-button" type="button">
+        <i class="fa-solid fa-caret-left"></i>
+        <span class="buttonText">Go Back</span>
+    </button>
+</div>
+
+<section class="box">
+    <!-- Validation Title/Header here -->
+    <div class="fw-bolder">
+        <header>VALIDATION MESSAGE HERE</header>
+    </div>
+
+    <!-- Validation Body Message here -->
+    <div class="text-light"> 
+        <p>Lorem ipsum odor amet, consectetuer adipiscing elit. Sit interdum purus vulputate dictum suspendisse etiam nascetur. 
+            Sollicitudin sodales scelerisque ullamcorper semper.</p>
+    </div>
+    
+    <!-- Redirection Button here -->
+    <div class="no-border-button">
+        <button type="button">Go to My.IIT
+        </button>
+    </div> 
+</section>

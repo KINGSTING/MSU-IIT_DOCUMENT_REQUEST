@@ -1,0 +1,24 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+flask = "*"
+python-dotenv = "*"
+flask-sqlalchemy = "*"
+mysql-connector-python = "*"
+flask-cors = "*"
+flask-jwt-extended = "*"
+flask-mail = "*"
+jinja2 = "*"
+cloudinary = "*"
+oauthlib = "*"
+requests-oauthlib = "*"
+google-auth = "*"
+google-auth-oauthlib = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.12"

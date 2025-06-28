@@ -1,0 +1,15 @@
+.page_title {
+    font-size: 15px;
+    padding: 12px 0;
+    font-size: 23px;
+    color: #444444;
+}
+
+/* Main Body */
+.body_container {
+    height: 588px;
+    min-width: 812px;
+    border: 1px solid #D2D5DC;
+    border-top: 4px solid #D2D5DC;
+    background-color: white;
+}
